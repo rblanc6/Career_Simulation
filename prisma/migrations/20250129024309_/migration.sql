@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Items" ALTER COLUMN "commentId" DROP NOT NULL,
+ALTER COLUMN "reviewId" DROP NOT NULL;
