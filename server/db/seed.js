@@ -1,6 +1,6 @@
-const db = require("./index");
+const db = require("../db/index");
 const { faker } = require("@faker-js/faker");
-const { prisma } = require("./common");
+const { prisma } = require("../db/common");
 require("dotenv").config();
 
 async function seed() {
@@ -20,14 +20,13 @@ async function seed() {
       )
     );
 
-    // Add 10 items.
+    // Add 20 items.
     await Promise.all(
       [...Array(20)].map(() =>
         prisma.items.createMany({
           data: {
             name: faker.commerce.product(),
             description: faker.commerce.productDescription(),
-            avgRating: parseInt(faker.number.binary()),
           },
         })
       )
