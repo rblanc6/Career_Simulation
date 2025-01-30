@@ -1,16 +1,9 @@
 const router = require("express").Router();
-const { prisma } = require("../db/common");
 
-// Get all items
-router.get("/items", async (req, res, next) => {
-  try {
-    const items = await prisma.items.findMany();
-    res.send(items);
-  } catch (error) {
-    next(error);
-  }
-});
-
+router.use("/auth", require("./auth"));
+router.use("/items", require("./items"));
+router.use("/comments", require("./comments"));
+router.use("/reviews", require("./reviews"));
 
 
 module.exports = router;

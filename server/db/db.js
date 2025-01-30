@@ -17,14 +17,13 @@ const createUser = async (username, password) => {
   }
 };
 
-const getUser = async (id) => {
+const getUser = async (username) => {
   const response = await prisma.users.findFirstOrThrow({
     where: {
-      id,
+      username,
     },
   });
   return response;
 };
-
 
 module.exports = { createUser, getUser };

@@ -38,10 +38,18 @@ router.post("/register", async (req, res, next) => {
 
 router.post("/login", async (req, res, next) => {
   try {
-    
+    const { username, password } = req.body;
+    const user = await getUser(username);
+    const match = await bcrypt.compare(password, user.password);
+    if (match) {
+      const token = setToken(user.id);
+      res.status(200).json(token);
+    } else {
+      res.status(403).json({ message: "Username and Password do not match" });
+    }
   } catch (error) {
-    
+    next(error);
   }
-})
+});
 
 module.exports = router;

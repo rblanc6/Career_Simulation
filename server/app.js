@@ -9,13 +9,13 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // Backend routes
-app.use("/auth", require("./auth"));
-app.use("/api", require("./api")),
+// app.use("/auth", require("./a"));
+app.use("/api", require("./api"));
 
-  // Error handling middleware
-  app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).send({ error: "Something went wrong!" });
-  });
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).send({ error: "Something went wrong!" });
+});
 
 module.exports = app;
