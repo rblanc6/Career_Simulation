@@ -11,7 +11,7 @@ async function seed() {
     // Add 10 Users.
     await Promise.all(
       [...Array(10)].map(() =>
-        prisma.users.createMany({
+        prisma.users.create({
           data: {
             username: faker.internet.username(),
             password: faker.internet.password(),
