@@ -2,6 +2,7 @@ const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const JWT = process.env.JWT || "1234";
+const bcrypt = require("bcrypt");
 
 const { createUser, getUser } = require("../db/db");
 
@@ -47,6 +48,15 @@ router.post("/login", async (req, res, next) => {
     } else {
       res.status(403).json({ message: "Username and Password do not match" });
     }
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get the currently logged in user
+router.get("/me", isLoggedIn, async (req, res, next) => {
+  try {
+    res.send(req.user);
   } catch (error) {
     next(error);
   }

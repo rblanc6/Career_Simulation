@@ -17,10 +17,10 @@ const createUser = async (username, password) => {
   }
 };
 
-const getUser = async (username) => {
+const getUser = async (id) => {
   const response = await prisma.users.findFirstOrThrow({
     where: {
-      username,
+      id,
     },
   });
   return response;
