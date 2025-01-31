@@ -95,19 +95,25 @@ router.post("/:id/reviews", isLoggedIn, async (req, res, next) => {
 });
 
 // Create a comment on review
-router.post("/:id/reviews/:reviewId/comments", isLoggedIn, async (req, res, next) => {
-  try {
-    const comments = await prisma.comments.create({
-      data: {
-        user: { connect: { id: parseInt(req.user.id) } },
-        review: { connect: { id: parseInt(req.params.id) } },
-        comment: req.body.comment,
-      },
-    });
-    res.status(201).send(comments);
-  } catch (error) {
-    next(error);
+
+router.post(
+  "/:id/reviews/:reviewId/comments",
+  isLoggedIn,
+  async (req, res, next) => {
+    try {
+      const comments = await prisma.comments.create({
+        data: {
+          user: { connect: { id: parseInt(req.user.id) } },
+          review: { connect: { id: parseInt(req.params.id) } },
+          comment: req.body.comment,
+        },
+      });
+      res.status(201).send(comments);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = router;
+
