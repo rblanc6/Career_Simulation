@@ -23,7 +23,8 @@ const isLoggedIn = async (req, res, next) => {
   }
 };
 
-// Get comments made by me
+
+// Get comments made by user
 router.get("/me", isLoggedIn, async (req, res, next) => {
   try {
     const reviews = await prisma.reviews.findMany({
@@ -38,7 +39,7 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
   }
 });
 
-//Update my review
+//Update users review
 router.put("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const reviews = await prisma.reviews.update({
@@ -56,7 +57,7 @@ router.put("/:id", isLoggedIn, async (req, res, next) => {
   }
 });
 
-//Delete my review
+//Delete users review
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const reviews = await prisma.reviews.delete({
