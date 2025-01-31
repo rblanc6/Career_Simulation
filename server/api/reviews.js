@@ -23,6 +23,7 @@ const isLoggedIn = async (req, res, next) => {
   }
 };
 
+
 // Get comments made by user
 router.get("/me", isLoggedIn, async (req, res, next) => {
   try {

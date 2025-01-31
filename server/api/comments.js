@@ -39,7 +39,9 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
   }
 });
 
+
 // Update user review
+
 router.put("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const comments = await prisma.comments.update({
@@ -56,7 +58,9 @@ router.put("/:id", isLoggedIn, async (req, res, next) => {
   }
 });
 
+
 // Delete user comment
+
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const comments = await prisma.comments.delete({
@@ -70,4 +74,6 @@ router.delete("/:id", isLoggedIn, async (req, res, next) => {
   }
 });
 
+
 module.exports = router;
+
