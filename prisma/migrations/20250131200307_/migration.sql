@@ -12,9 +12,8 @@ CREATE TABLE "Items" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "avgRating" INTEGER,
+    "avgRating" INTEGER NOT NULL DEFAULT 0,
     "commentId" INTEGER,
-    "reviewId" INTEGER,
 
     CONSTRAINT "Items_pkey" PRIMARY KEY ("id")
 );
@@ -34,6 +33,10 @@ CREATE TABLE "Reviews" (
     "review" TEXT NOT NULL,
     "rating" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
+    "itemId" INTEGER NOT NULL,
 
     CONSTRAINT "Reviews_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Users_username_key" ON "Users"("username");

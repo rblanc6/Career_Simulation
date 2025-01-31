@@ -21,9 +21,7 @@ model Items {
   name        String
   description String
   avgRating   Int       @default(0)
-  commentId   Int?
-  comment     Comments? @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  reviews Reviews[]
+  review Reviews[]
 }
 
 model Comments {
@@ -31,7 +29,8 @@ model Comments {
   comment String
   userId  Int
   user    Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items   Items[]
+  reviewId Int
+  reviews Reviews @relation(fields: [reviewId], references: [id], onDelete: Cascade)
 }
 
 model Reviews {
@@ -42,4 +41,5 @@ model Reviews {
   user   Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
   itemId Int
   item Items @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  comments Comments[]
 }
