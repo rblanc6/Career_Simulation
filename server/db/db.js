@@ -17,7 +17,16 @@ const createUser = async (username, password) => {
   }
 };
 
-const getUser = async (id) => {
+const getUser = async (username) => {
+  const response = await prisma.users.findFirstOrThrow({
+    where: {
+      username,
+    },
+  });
+  return response;
+};
+
+const getUserId = async (id) => {
   const response = await prisma.users.findFirstOrThrow({
     where: {
       id,
@@ -26,4 +35,4 @@ const getUser = async (id) => {
   return response;
 };
 
-module.exports = { createUser, getUser };
+module.exports = { createUser, getUser, getUserId };
