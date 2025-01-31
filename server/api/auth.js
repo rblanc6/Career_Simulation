@@ -4,7 +4,7 @@ require("dotenv").config();
 const JWT = process.env.JWT || "1234";
 const bcrypt = require("bcrypt");
 
-const { createUser, getUser } = require("../db/db");
+const { createUser, getUser, getUserId } = require("../db/db");
 
 const setToken = (id) => {
   return jwt.sign({ id }, JWT, { expiresIn: "5h" });
@@ -13,11 +13,14 @@ const setToken = (id) => {
 // Authorized Token
 const isLoggedIn = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  const token = authHeader?.slice(7);
+  if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ message: "Unauthorized: No token provided" });;
+  }
+  const token = authHeader.slice(7);
   if (!token) return next();
   try {
     const { id } = jwt.verify(token, JWT);
-    const user = await getUser(id);
+    const user = await getUserId(id);
     req.user = user;
     next();
   } catch (error) {
