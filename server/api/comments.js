@@ -38,4 +38,18 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
   }
 });
 
+// Delete my comment
+router.delete("/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    const comments = await prisma.comments.delete({
+      where: {
+        id: parseInt(req.params.id),
+      },
+    });
+    res.send(comments);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
