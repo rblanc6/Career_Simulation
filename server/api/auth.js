@@ -4,6 +4,7 @@ require("dotenv").config();
 const bcrypt = require("bcrypt");
 const JWT = process.env.JWT || "1234";
 
+
 const { createUser, getUser, getUserId } = require("../db/db");
 
 const setToken = (id) => {
@@ -55,6 +56,7 @@ router.post("/login", async (req, res, next) => {
     next(error);
   }
 });
+
 // Get the currently logged in user
 router.get("/me", isLoggedIn, async (req, res, next) => {
   try {
@@ -63,6 +65,6 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
-module.exports = { isLoggedIn };
+
 module.exports = router;
 
