@@ -13,7 +13,7 @@ const createUser = async (username, password) => {
     });
     return response;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -35,4 +35,6 @@ const getUserId = async (id) => {
   return response;
 };
 
-module.exports = { createUser, getUserId, getUser };
+
+module.exports = { createUser, getUser, getUserId };
+

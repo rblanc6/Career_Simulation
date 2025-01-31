@@ -1,8 +1,9 @@
 const router = require("express").Router();
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const JWT = process.env.JWT || "1234";
 const bcrypt = require("bcrypt");
+const JWT = process.env.JWT || "1234";
+
 
 const { createUser, getUser, getUserId } = require("../db/db");
 
@@ -66,3 +67,4 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
 });
 
 module.exports = router;
+

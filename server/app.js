@@ -9,7 +9,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // Backend routes
-// app.use("/auth", require("./a"));
 app.use("/api", require("./api"));
 
 // Error handling middleware
