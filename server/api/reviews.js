@@ -38,6 +38,24 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
   }
 });
 
+//Update my review
+router.put("/:id", isLoggedIn, async (req, res, next) => {
+  try {
+    const reviews = await prisma.reviews.update({
+      where: {
+        id: parseInt(req.params.id),
+      },
+      data: {
+        review: req.body.review,
+        rating: parseInt(req.body.rating),
+      },
+    });
+    res.send(reviews);
+  } catch (error) {
+    next(error);
+  }
+});
+
 //Delete my review
 router.delete("/:id", isLoggedIn, async (req, res, next) => {
   try {
