@@ -13,7 +13,7 @@ const createUser = async (username, password) => {
     });
     return response;
   } catch (error) {
-    next(error);
+    console.error(error);
   }
 };
 
@@ -25,6 +25,5 @@ const getUser = async (id) => {
   });
   return response;
 };
-
 
 module.exports = { createUser, getUser };

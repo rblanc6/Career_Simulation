@@ -29,8 +29,7 @@ model Items {
   avgRating   Int @default(0)
   commentId   Int?
   comment     Comments? @relation(fields: [commentId], references: [id], onDelete: Cascade)
-  reviewId    Int? 
-  review      Reviews?  @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  reviews Reviews[]
 }
 
 model Comments {
@@ -47,5 +46,6 @@ model Reviews {
   rating Int
   userId Int
   user   Users   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  items  Items[]
+  itemId Int
+  item Items @relation(fields: [itemId], references: [id], onDelete: Cascade)
 }
