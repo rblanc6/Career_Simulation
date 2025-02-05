@@ -63,7 +63,7 @@ router.get("/:id/reviews", async (req, res, next) => {
 });
 
 // Get individual review
-router.get("/:id/reviews/:reviewId", async (req, res, next) => {
+router.get("/reviews/:id", async (req, res, next) => {
   try {
     const review = await prisma.reviews.findFirst({
       where: {
